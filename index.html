@@ -68,10 +68,14 @@ Who has never heard / never used any Apache Commons component?
 ### StringUtils - we all know that!
 
 ```
-if(StringUtils.isNotEmpty(path)) {
-  path = StringUtils.appendIfMissing(path, "/segment")
+String path = "/path/to/some/file";
+if (StringUtils.isNotEmpty(path)) {
+    path = StringUtils.appendIfMissing(path, "/file");
+    path = StringUtils.appendIfMissing(path, "/segment");
 }
 ```
+
+yields "/path/to/some/file/segment"
 
 ---
 
