@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Beyond StringUtils</title>
+
+    <meta name="description" content="Title - Sub Title">
+    <meta name="author" content="Your Name">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/deck.css">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <div class="footer">
+        <!--currently unused-->
+    </div>
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section class="whiteText" data-markdown data-background="img/background-title-16x9.png">
+            <script type="text/template">
+                # Apache Commons
+                ## Beyond StringUtils
+
+                Benedikt Ritter, codecentric AG
+            </script>
+        </section>
+
+        <!-- You can use inline markdown -->
+
+        <section data-markdown data-background="img/background-green-16x9.png" data-separator="---">
+### Quick poll
+
+Who has never heard / never used any Apache Commons component?
+
+---
+
+### StringUtils - we all know that!
+
+```
+if(StringUtils.isNotEmpty(path)) {
+  path = StringUtils.appendIfMissing(path, "/segment")
+}
+```
+
+---
+
+### How about StrSubstitutor?
+
+```
+Map&lt;String, String&gt; values = singletonMap("key", "a value");
+String tmpl = "Replacing ${key} &amp; fallbacks ${undefined:1234}";
+
+StrSubstitutor sub = new StrSubstitutor(values);
+String resolvedString = sub.replace(tmpl);
+```
+
+yields "Replacing a value &amp; fallbacks 1234"
+
+---
+
+### Handling CSV like a boss
+Commons CSV
+
+```
+Reader in = new FileReader("path/to/file.csv");
+Iterable&lt;CSVRecord&gt; records = CSVFormat.EXCEL.parse(in);
+for (CSVRecord record : records) {
+    String lastName = record.get("Last Name");
+    String firstName = record.get("First Name");
+}
+```
+
+---
+
+### Baby, it's all about that base64
+Commons Codec
+
+```
+InputStream is = new FileInputStream("/path/to/image");
+byte[] imgBytes = IOUtils.toByteArray(is);
+String base64 = Base64.encodeBase64String(imgBytes);
+```
+
+---
+
+### Cool Sandbox stuff
+BeanUtils2
+
+```
+import static org.apache.commons.beanutils2.BeanUtils.on;
+
+on(myBean).set("name").with("Peter")
+
+Map&lt;String, Object&gt; props = on(myBean).describe();
+for(Entry&lt;String, Object&gt; prop : props) {
+  System.out.println(prop.getKey() + ": " + prop.getValue());
+}
+```
+
+---
+
+### So much more!
+
+- Apache Commons CLI
+- Apache Commons Collections
+- Apache Commons Compress
+- Apache Commons Email
+- Apache Commons FileUpload
+- Apache Commons Math
+- Apache Commons Net
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        slideNumber: 'c/t',
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
