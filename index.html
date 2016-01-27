@@ -79,7 +79,7 @@ if(StringUtils.isNotEmpty(path)) {
 
 ```
 Map&lt;String, String&gt; values = singletonMap("key", "a value");
-String tmpl = "Replacing ${key} &amp; fallbacks ${undefined:1234}";
+String tmpl = "Replacing ${key} &amp; fallbacks ${undefined:-1234}";
 
 StrSubstitutor sub = new StrSubstitutor(values);
 String resolvedString = sub.replace(tmpl);
